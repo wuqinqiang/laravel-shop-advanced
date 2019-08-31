@@ -4,6 +4,15 @@ use Illuminate\Routing\Router;
 
 Admin::registerAuthRoutes();
 
+
+Route::get('alipay', function() {
+    return app('alipay')->web([
+        'out_trade_no' => time(),
+        'total_amount' => '1',
+        'subject' => 'test subject - 测试',
+    ]);
+});
+
 Route::group([
     'prefix'        => config('admin.route.prefix'),
     'namespace'     => config('admin.route.namespace'),
@@ -31,3 +40,5 @@ Route::group([
     $router->put('coupon_codes/{id}', 'CouponCodesController@update');
     $router->delete('coupon_codes/{id}', 'CouponCodesController@destroy');
 });
+
+
