@@ -7,7 +7,7 @@ use App\Models\Order;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UpdateCrowdfundingProductProgress
+class UpdateCrowdfundingProductProgress implements ShouldQueue
 {
     /**
      * Handle the event.
@@ -30,7 +30,7 @@ class UpdateCrowdfundingProductProgress
                 $query->where('product_id', $crowdfunding->product_id);
             })->first([
                 \DB::raw('sum(total_amount) as total_amount'),
-                \DB::raw('count(distinct(user_id) as user_count'),
+                \DB::raw('count(distinct(user_id)) as user_count'),
             ]);
 
         $crowdfunding->update([
