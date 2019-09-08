@@ -53,5 +53,10 @@ class InstallmentItem extends Model
         return Carbon::now()->gt($this->due_date);
     }
 
+    public function installment()
+    {
+        return $this->belongsTo(Installment::class);
+    }
+
 
 }
