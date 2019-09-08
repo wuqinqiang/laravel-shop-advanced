@@ -44,8 +44,8 @@ class RefundCrowdfundingOrders implements ShouldQueue
         Order::query()
             ->where('type', Order::TYPE_CROWDFUNDING)
             ->whereNotNull('paid_at')
-            ->whereHas('items', function ($query) use ($product) {
-                $query->where('product_id', $product->product_id);
+            ->whereHas('items', function ($query) {
+                $query->where('product_id', $this->crowdfunding->product_id);
             })
             ->get()
             ->each(function (Order $order) use ($orderService) {
