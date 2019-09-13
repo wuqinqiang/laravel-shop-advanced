@@ -134,5 +134,8 @@ return [
         ],
 
     ],
+    'elasticsearch'=>[
+      'host'=>explode(',',env('ES_HOSTS')),
+    ],
 
 ];
